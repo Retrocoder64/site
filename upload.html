@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Guardar HTML en JSON</title>
+</head>
+<body>
+  <textarea id="htmlInput" rows="10" cols="50"></textarea>
+  <br>
+  <button onclick="guardarHTML()">Guardar</button>
+
+  <script>
+    function guardarHTML() {
+      // Obtén el contenido HTML del textarea
+      var html = document.getElementById("htmlInput").value;
+
+      // Crea un objeto JSON con el contenido HTML
+      var jsonData = {
+        contenidoHTML: html
+      };
+
+      // Convierte el objeto JSON a una cadena de texto
+      var jsonString = JSON.stringify(jsonData);
+
+      // Crea un enlace de descarga para el archivo JSON
+      var downloadLink = document.createElement("a");
+      downloadLink.href = "data:application/json;charset=utf-8," + encodeURIComponent(jsonString);
+      downloadLink.download = "contenido.json";
+      downloadLink.style.display = "none";
+
+      // Agrega el enlace de descarga al documento y haz clic en él
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+    }
+  </script>
+</body>
+</html>
